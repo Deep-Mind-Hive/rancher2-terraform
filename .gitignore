@@ -1,0 +1,5 @@
+.DS_Store
+.terraform*
+private-key*
+terraform.*
+kube_config_cluster.yml
