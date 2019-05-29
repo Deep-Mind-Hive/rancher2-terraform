@@ -35,6 +35,6 @@ module "install_rancher" {
   email = var.email
   kube_cluster_yaml = module.rke.kube_cluster_yaml
   rancher_version = var.rancher_version
-  rancher2_admin_password = var.rancher2_admin_password
+  # rancher2_admin_password = var.rancher2_admin_password
   tls_source = var.tls_source
 }

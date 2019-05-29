@@ -22,9 +22,9 @@ variable "rancher_version" {
   default = "2.2.3"
 }
 
-variable "rancher2_admin_password" {
-  type = string
-}
+# variable "rancher2_admin_password" {
+#   type = string
+# }
 
 variable "insecure" {
   type = string

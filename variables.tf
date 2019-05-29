@@ -17,9 +17,9 @@ variable "rancher_version" {
   default = "2.2.2"
 }
 
-variable "rancher2_admin_password" {
-  type = string
-}
+# variable "rancher2_admin_password" {
+#   type = string
+# }
 
 variable "tls_source" {
   type = string
