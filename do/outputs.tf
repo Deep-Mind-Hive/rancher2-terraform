@@ -7,10 +7,10 @@ output "ssh_username" {
 # }
 
 output "addresses" {
-  value = {
+  value = [
     for instance in digitalocean_droplet.rke-node:
-    instance.name => instance.ipv4_address
-  }
+    instance.ipv4_address
+  ]
 }
 
 output "private_key" {

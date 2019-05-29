@@ -5,7 +5,7 @@ resource tls_private_key "node-key" {
 }
 
 resource "random_string" "key-suffix" {
-  length = 10
+  length  = 10
   special = false
 }
 
@@ -13,7 +13,6 @@ resource "local_file" "private-key" {
   filename = "./private-key-${random_string.key-suffix.result}"
   content  = "${tls_private_key.node-key.private_key_pem}"
 }
-
 
 resource "digitalocean_ssh_key" "key" {
   name       = "${var.node_name_prefix}-key-${random_string.key-suffix.result}"
@@ -26,7 +25,7 @@ resource "digitalocean_droplet" "rke-node" {
   region   = "${var.region}"
   size     = "${var.droplet_size}"
   ssh_keys = ["${digitalocean_ssh_key.key.id}"]
-  count    = var.node_count
+  count    = "${var.node_count}"
 
   provisioner "remote-exec" {
     connection {
@@ -41,7 +40,7 @@ resource "digitalocean_droplet" "rke-node" {
       "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -",
       "add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable\"",
       "apt-get update",
-      "apt-get install -y docker-ce docker-ce-cli containerd.io"
+      "apt-get install -y docker-ce docker-ce-cli containerd.io",
     ]
   }
 }

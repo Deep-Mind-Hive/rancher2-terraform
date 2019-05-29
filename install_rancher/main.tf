@@ -52,27 +52,29 @@ resource "helm_release" "rancher" {
 
   set {
     name  = "hostname"
-    value = "${var.le_hostname}"
+    value = "${var.hostname}"
   }
 
   set {
     name  = "ingress.tls.source"
-    value = "letsEncrypt"
+    value = "${var.tls_source}"
   }
 
   set {
     name  = "letsEncrypt.email"
-    value = "${var.le_email}"
+    value = "${var.email}"
   }
 }
 
-# provider "rancher2" {
-#   bootstrap = true
-#   api_url   = "${var.le_hostname}"
-# }
-#
-# resource "rancher2_bootstrap" "admin" {
-#   password  = "fbYayodKoeEvXAxcokD8fpWn3UGDj6XmKwiwbvf1"
-#   telemetry = true
-# }
+provider "rancher2" {
+  bootstrap = true
+  api_url   = "https://${var.hostname}"
+  insecure = var.insecure
+}
 
+resource "rancher2_bootstrap" "admin" {
+  password  = "${var.rancher2_admin_password}"
+  telemetry = true
+
+  # token_update = true
+}
