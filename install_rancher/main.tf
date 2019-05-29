@@ -66,15 +66,16 @@ resource "helm_release" "rancher" {
   }
 }
 
-provider "rancher2" {
-  bootstrap = true
-  api_url   = "https://${var.hostname}"
-  insecure = var.insecure
-}
+# provider "rancher2" {
+#   bootstrap = true
+#   api_url   = "https://${var.hostname}"
+#   insecure = var.insecure
+# }
+#
+# resource "rancher2_bootstrap" "admin" {
+#   password  = "${var.rancher2_admin_password}"
+#   telemetry = true
+#
+#   # token_update = true
+# }
 
-resource "rancher2_bootstrap" "admin" {
-  password  = "${var.rancher2_admin_password}"
-  telemetry = true
-
-  # token_update = true
-}
